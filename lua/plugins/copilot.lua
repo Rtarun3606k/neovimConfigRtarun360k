@@ -1,0 +1,23 @@
+return {
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        -- We disable the built-in suggestion UI
+        -- to use nvim-cmp instead.
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end,
+  },
+  {
+    -- This is the plugin that connects Copilot to nvim-cmp
+    "zbirenbaum/copilot-cmp",
+    dependencies = { "copilot.lua" },
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  }
+}
