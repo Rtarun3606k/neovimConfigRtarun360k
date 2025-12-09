@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 -- ADD YOUR NEW KEYMAP HERE --
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
-vim.diagnostic.config({ virtual_text = true, signs = true })
+vim.diagnostic.config({ virtual_text = true, signs = true,underline = true, update_in_insert = true  })
 
 -- Tab Management Shortcuts fro tab close and tab new commands -- 
 -- Tab Management Shortcuts (Renamed to avoid conflict with Test)
