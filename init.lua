@@ -103,3 +103,19 @@ vim.keymap.set("v", "j", "gj", { desc = "Move down visual line" })
 vim.keymap.set("v", "k", "gk", { desc = "Move up visual line" })
 vim.keymap.set("v", "<Down>", "gj", { desc = "Move down visual line" })
 vim.keymap.set("v", "<Up>", "gk", { desc = "Move up visual line" })
+
+-- Save File (Ctrl + s)
+vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save file" })
+vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>gi", { desc = "Save file" })
+
+-- Auto-Format on Save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("LspFormatting", {}),
+  callback = function()
+    vim.lsp.buf.format({ async = true })
+  end,
+})
+
+
+
+

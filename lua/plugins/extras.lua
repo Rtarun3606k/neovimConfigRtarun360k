@@ -52,5 +52,26 @@ return {
         api.toggle.linewise(vim.fn.visualmode())
       end)
     end,
-  }
+  },
+  -- The Minimap (Code Preview on the right)
+  {
+    "gorbit99/codewindow.nvim",
+    config = function()
+      local codewindow = require("codewindow")
+      codewindow.setup({
+        auto_enable = true,       -- Open automatically when you enter a file
+        minimap_width = 10,       -- How wide the preview is
+        use_git = true,           -- Show git changes in the minimap too
+        window_border = "rounded" -- Soft rounded corners
+      })
+
+      -- 🎨 Custom Border Color (Dark Purple/Grey)
+      vim.api.nvim_set_hl(0, "CodewindowBorder", { fg = "#585b70" })
+
+      -- ⌨️ THE COMMAND / SHORTCUT
+      -- Press Space + m to toggle it On/Off
+      vim.keymap.set("n", "<leader>m", codewindow.toggle_minimap, { desc = "Toggle Minimap" })
+    end,
+  },
+
 }
