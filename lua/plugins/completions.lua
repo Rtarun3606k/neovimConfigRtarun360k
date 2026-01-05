@@ -2,9 +2,9 @@ return {
   {
     "hrsh7th/cmp-nvim-lsp"
   },
-  {
-  "github/copilot.vim"
-  },
+  -- {
+  -- "github/copilot.vim"
+  -- },
   {
     "L3MON4D3/LuaSnip",
     dependencies = {
@@ -38,7 +38,7 @@ return {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" }, -- For luasnip users.
-	{ name = "copilot" }, -- for copilot see any chnages in repo
+          -- { name = "copilot" }, -- for copilot see any chnages in repo
         }, {
           { name = "buffer" },
         }),

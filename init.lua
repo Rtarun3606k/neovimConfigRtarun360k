@@ -1,4 +1,4 @@
- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -37,9 +37,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 -- ADD YOUR NEW KEYMAP HERE --
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
-vim.diagnostic.config({ virtual_text = true, signs = true,underline = true, update_in_insert = true  })
+vim.diagnostic.config({ virtual_text = true, signs = true, underline = true, update_in_insert = true })
 
--- Tab Management Shortcuts fro tab close and tab new commands -- 
+-- Tab Management Shortcuts fro tab close and tab new commands --
 -- Tab Management Shortcuts (Renamed to avoid conflict with Test)
 vim.keymap.set("n", "<leader>nt", ":tabnew<CR>", { desc = "New Tab" })
 vim.keymap.set("n", "<leader>dt", ":tabclose<CR>", { desc = "Delete/Close Tab" })
@@ -82,7 +82,7 @@ vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Outdent selection" })
 -- 2. Normal Mode (Just press Tab or Shift+Tab on the current line)
 vim.keymap.set("n", "<Tab>", ">>", { desc = "Indent line" })
 vim.keymap.set("n", "<S-Tab>", "<<", { desc = "Outdent line" })
- 
+
 -- TEXT WRAP SETTINGS -----------------------------
 
 -- 1. Enable Wrap
@@ -116,6 +116,22 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+-- Show the line number on the current line
+vim.opt.number = true
+
+-- Show relative numbers for all other lines
+vim.opt.relativenumber = true
 
 
-
+-- Force Treesitter Folding (Auto-Collapse) on every file open
+vim.api.nvim_create_autocmd({ "BufEnter", "BufAdd", "BufNew", "BufNewFile", "BufWinEnter" }, {
+  group = vim.api.nvim_create_augroup("TS_FOLD_WORKAROUND", {}),
+  callback = function()
+    -- Tell Neovim to use an expression (code) for folding
+    vim.opt.foldmethod = "expr"
+    -- Tell it to use Treesitter's logic for that expression
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    -- Start with all folds OPEN (so your file doesn't look empty on load)
+    vim.opt.foldlevel = 99
+  end,
+})
